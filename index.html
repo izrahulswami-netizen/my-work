@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>My Shop</title>
+<style>
+*{box-sizing:border-box;margin:0}
+body{font-family:-apple-system,sans-serif;min-height:100vh;color:#fff;
+background:linear-gradient(135deg,#4f46e5,#ec4899,#f59e0b);background-attachment:fixed;padding:90px 16px 30px}
+.glass{background:rgba(255,255,255,.18);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+border:1px solid rgba(255,255,255,.35);box-shadow:0 8px 32px rgba(0,0,0,.15)}
+nav{position:fixed;top:10px;left:10px;right:10px;padding:14px 20px;border-radius:24px;
+font-weight:700;font-size:18px;z-index:9}
+#q{width:100%;padding:14px 18px;border-radius:20px;color:#fff;font-size:16px;outline:none;margin-bottom:18px}
+#q::placeholder{color:#fffb}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.card{border-radius:24px;padding:12px;transition:.3s}
+.card:active{transform:scale(.96)}
+.img{height:110px;border-radius:16px;background:rgba(255,255,255,.25);display:flex;
+align-items:center;justify-content:center;font-size:44px}
+.card h3{font-size:15px;margin:10px 0 4px}
+.card p{font-size:14px;opacity:.9}
+.btn{display:block;margin-top:10px;padding:10px;border-radius:14px;text-align:center;
+background:#25d366;color:#fff;text-decoration:none;font-weight:600;font-size:14px}
+</style></head><body>
+<nav class="glass">✨ My Shop</nav>
+<input id="q" class="glass" placeholder="Search products...">
+<div class="grid" id="list"></div>
+<script>
+const PHONE="91XXXXXXXXXX"; // your WhatsApp number
+const items=[
+{n:"Product One",p:"₹499",e:"👕"},
+{n:"Product Two",p:"₹999",e:"👟"},
+{n:"Product Three",p:"₹1499",e:"🎧"},
+{n:"Product Four",p:"₹299",e:"⌚"}];
+const list=document.getElementById("list");
+function show(t=""){
+list.innerHTML=items.filter(i=>i.n.toLowerCase().includes(t.toLowerCase()))
+.map(i=>`<div class="card glass"><div class="img">${i.e}</div><h3>${i.n}</h3><p>${i.p}</p>
+<a class="btn" href="https://wa.me/${PHONE}?text=${encodeURIComponent("I want to order "+i.n)}">Order on WhatsApp</a></div>`).join("");}
+document.getElementById("q").oninput=e=>show(e.target.value);
+show();
+</script></body></html>
